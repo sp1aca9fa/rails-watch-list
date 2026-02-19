@@ -1,0 +1,13 @@
+<div>
+  <h1>Movie lists</h1>
+  <p>Create and manage your own lists!</p>
+</div>
+<div>
+  <h2>My lists</h2>
+  <% @lists.each do |list| %>
+  <div class="list-card">
+    <%= link_to list.name, list_path(list) %>
+  </div>
+  <% end %>
+</div>
+<%= link_to "Create a movie list", new_list_path %>

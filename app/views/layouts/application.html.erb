@@ -24,6 +24,13 @@
   </head>
 
   <body>
+    <div>
+      <%= link_to "H", root_path %>
+      <div>
+        <p>My lists</p>
+        <%= link_to "New list", new_list_path %>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
