@@ -2,6 +2,18 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(clamp(210px, 40vw, 300px), 1fr));
   gap: 1rem;
+  justify-content: center;
+}
 
-  justify-content: center; /* centers rows */
+@media (max-width: 576px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .cards-container {
+    grid-template-columns:
+      repeat(auto-fit, minmax(240px, 1fr));
+  }
 }
