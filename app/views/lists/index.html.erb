@@ -4,10 +4,14 @@
 </div>
 <div>
   <h2>My lists</h2>
-  <% @lists.each do |list| %>
-  <div class="list-card">
-    <%= link_to list.name, list_path(list) %>
+  <div class="cards">
+    <% @lists.each do |list| %>
+      <%= link_to list_path(list), class: 'text-white text-decoration-none' do %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg' %>)">
+          <%= list.name %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-  <% end %>
 </div>
 <%= link_to "Create a movie list", new_list_path %>

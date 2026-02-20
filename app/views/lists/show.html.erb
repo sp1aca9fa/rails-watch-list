@@ -1,9 +1,9 @@
-<div>
+<div style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @list.photo.attached? ? cl_image_path(@list.photo.key) : 'https://happiclap.com/wp-content/uploads/2019/06/Everyday-Clapboard-1.jpg' %>)">
   <h1><%= @list.name %></h1>
 </div>
-<%= link_to "New movie", new_bookmark_path %>
+<%= link_to "New movie", new_list_bookmark_path(@list) %>
 <% @list.bookmarks.each do |bookmark| %>
-<div class="movie-card">
+<div class="card">
   <%= bookmark.movie.title %>
   <%= link_to "Delete movie", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 </div>
