@@ -4,10 +4,10 @@
 </div>
 <div class="container">
   <h2>My lists</h2>
-  <div class="cards d-flex flex-wrap gap-3">
+  <div class="cards-container">
     <% @lists.each do |list| %>
-      <div class="card-category text-center align-content-center border border-3 opacity-75 rounded text-wrap" style="width: 160px; height: 150px; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg'%>); background-size: cover; background-position: center">
-        <%= link_to list.name, list_path(list), class: 'text-white text-decoration-none' %>
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg'%>)">
+        <%= link_to list.name, list_path(list), class: '', style: "height: 100%" %>
       </div>
     <% end %>
   </div>
