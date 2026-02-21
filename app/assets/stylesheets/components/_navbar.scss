@@ -1,6 +1,6 @@
 .navbar {
   justify-content: space-between;
-  background: white;
+  background: rgb(61, 67, 74);
 }
 
 .navbar .navbar-collapse {
@@ -9,4 +9,8 @@
 
 .navbar .navbar-brand img {
   width: 40px;
+}
+
+.navbar a {
+  text-decoration: none;
 }
