@@ -1,12 +1,13 @@
-<div class="banner d-flex-column text-center align-content-center" style="min-height: clamp(300px, 40svh, 600px)">
+<div class="banner d-flex-column text-center align-content-center">
   <h1 class="mb-0">Movie lists</h1>
-  <p class="text-opacity-75">Create and manage your own lists!</p>
+  <p class="text-opacity-75 text-secondary">Create and manage your own lists!</p>
 </div>
 <div class="container">
   <h2>My lists</h2>
   <div class="cards-container">
     <% @lists.each do |list| %>
-      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg'%>)">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg'%>)">
         <%= link_to list.name, list_path(list), class: '', style: "height: 100%" %>
       </div>
     <% end %>

@@ -1,0 +1,19 @@
+.banner {
+  margin-inline: auto;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    asset-url("Orfeo-Multisala-1-1024x683.jpg");
+
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+
+  min-height: clamp(300px, 40svh, 700px);
+}
+
+@media (min-width: 1000px) {
+  .banner {
+    max-width: 1000px;
+  }
+}
