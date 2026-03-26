@@ -46,7 +46,7 @@ A movie watchlist application built with Ruby on Rails where users can create li
 ## Setup
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/sp1aca9fa/rails-watch-list.git
 cd rails-watch-list
 bundle install
 rails db:create db:migrate db:seed
