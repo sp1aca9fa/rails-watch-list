@@ -14,6 +14,7 @@ A movie watchlist application built with Ruby on Rails where users can create li
 - Ruby on Rails
 - PostgreSQL
 - Active Record (ORM)
+- Active Storage + Cloudinary (for list photo uploads)
 - ERB (Embedded Ruby)
 - Bootstrap & Font Awesome (for styling)
 - Simple Form (for form handling)
@@ -29,6 +30,7 @@ A movie watchlist application built with Ruby on Rails where users can create li
 
 - **List**
   - name
+  - photo (Active Storage attachment)
 
 - **Bookmark**
   - comment
@@ -49,6 +51,17 @@ A movie watchlist application built with Ruby on Rails where users can create li
 git clone https://github.com/sp1aca9fa/rails-watch-list.git
 cd rails-watch-list
 bundle install
+```
+
+Create a `.env` file in the project root with your Cloudinary credentials (required for list photo uploads):
+
+```
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
+```
+
+Then set up the database and start the server (seeding fetches movies from an external API, so an internet connection is required):
+
+```bash
 rails db:create db:migrate db:seed
 rails server
 ```
