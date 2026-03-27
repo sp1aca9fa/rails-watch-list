@@ -1,48 +1,38 @@
-# Rails Watch List
+# WatchList
 
-A movie watchlist application built with Ruby on Rails where users can create lists and save movies through bookmarks.
+A movie watchlist app built with Ruby on Rails. Users can sign up, create personal movie lists, and save movies with their own ratings and notes.
 
 ## Features
 
-- Create and manage movie lists
-- View list details with associated movies
-- Add movies to lists via bookmarks
-- Remove movies from lists
+- User authentication (sign up, sign in, sign out) via Devise
+- Create and delete personal movie lists with optional cover photos
+- Browse a catalogue of movies seeded from the TMDB API
+- Save movies to lists with a personal rating (1–10) and optional note
+- Edit or remove saved movies from a list
+- Responsive design — works on mobile and desktop
+- Dark cinema-themed UI with custom Bootstrap modal confirmations
 
 ## Tech Stack
 
-- Ruby on Rails
-- PostgreSQL
-- Active Record (ORM)
-- Active Storage + Cloudinary (for list photo uploads)
-- ERB (Embedded Ruby)
-- Bootstrap & Font Awesome (for styling)
-- Simple Form (for form handling)
+- **Ruby on Rails 8** — MVC framework
+- **PostgreSQL** — database
+- **Devise** — user authentication
+- **Active Storage + Cloudinary** — list cover photo uploads
+- **Bootstrap 5.3 + Font Awesome 6** — UI and icons
+- **Simple Form** — form helpers
+- **Hotwire (Turbo + Stimulus)** — SPA-like navigation without a JS framework
+- **Import Maps** — JS module management (no Node/webpack)
 
 ## Data Model
 
-- **Movie**
-  - title
-  - overview
-  - poster_url
-  - rating
+```
+User ──< List ──< Bookmark >── Movie
+```
 
-- **List**
-  - name
-  - photo (Active Storage attachment)
-
-- **Bookmark**
-  - comment
-  - belongs to a movie
-  - belongs to a list
-
-## How It Works
-
-- Movies are pre-seeded in the database
-- Users create custom lists to organize movies
-- Bookmarks act as a join model between movies and lists
-- Active Record associations manage many-to-many relationships
-- Validations ensure data consistency (e.g., unique pairings, comment length)
+- **User** — authenticates via Devise, owns many lists
+- **Movie** — seeded from TMDB, has title, overview, poster, and rating
+- **List** — belongs to a user, has a name and optional Cloudinary cover photo
+- **Bookmark** — join model between List and Movie; adds a user rating (1–10) and an optional comment
 
 ## Setup
 
@@ -52,30 +42,26 @@ cd rails-watch-list
 bundle install
 ```
 
-Create a `.env` file in the project root with your Cloudinary credentials (required for list photo uploads):
+Create a `.env` file with your Cloudinary credentials (required for cover photo uploads):
 
 ```
 CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
 ```
 
-Then set up the database and start the server (seeding fetches movies from an external API, so an internet connection is required):
+Set up the database and start the server (seeding fetches ~100 movies from TMDB, so an internet connection is required):
 
 ```bash
 rails db:create db:migrate db:seed
 rails server
 ```
 
-Open in your browser:
-http://localhost:3000/lists
+Open [http://localhost:3000](http://localhost:3000) in your browser. Two sample accounts are created by the seed:
 
-## Learnings
-
-- Designing and implementing many-to-many relationships
-- Using join models with Active Record
-- Structuring multi-model Rails applications
-- Enforcing data integrity with validations
-- Managing nested resources and associations
+| Email | Password |
+|---|---|
+| alice@example.com | password123 |
+| bob@example.com | password123 |
 
 ## Notes
 
-This project is a solution to a Le Wagon bootcamp challenge focused on building a multi-model Rails application with many-to-many relationships and structured data modeling.
+Started as a Le Wagon bootcamp challenge focused on many-to-many relationships. Extended with authentication, user ratings, a full visual overhaul, and responsive mobile support.
