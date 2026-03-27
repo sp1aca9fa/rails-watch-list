@@ -7,8 +7,16 @@
           <i class="fa-solid fa-film me-1"></i>
           <%= pluralize(@list.movies.count, "movie") %>
         </p>
-        <%= link_to new_list_bookmark_path(@list), class: "btn btn-primary" do %>
-          <i class="fa-solid fa-plus me-2"></i>Add Movie
+        <% if current_user == @list.user %>
+          <div class="d-flex gap-2">
+            <%= link_to new_list_bookmark_path(@list), class: "btn btn-primary" do %>
+              <i class="fa-solid fa-plus me-2"></i>Add Movie
+            <% end %>
+            <%= link_to list_path(@list), class: "btn btn-outline-danger btn-sm align-self-center",
+                  data: { turbo_method: :delete, turbo_confirm: "Delete \"#{@list.name}\" and all its movies?" } do %>
+              <i class="fa-solid fa-trash me-1"></i>Delete List
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -20,9 +28,13 @@
     <div class="empty-state text-center py-5">
       <i class="fa-solid fa-film fa-4x mb-4"></i>
       <h3>No movies yet</h3>
-      <p>Add your first movie to this list.</p>
-      <%= link_to new_list_bookmark_path(@list), class: "btn btn-primary mt-2" do %>
-        <i class="fa-solid fa-plus me-2"></i>Add Movie
+      <% if current_user == @list.user %>
+        <p>Add your first movie to this list.</p>
+        <%= link_to new_list_bookmark_path(@list), class: "btn btn-primary mt-2" do %>
+          <i class="fa-solid fa-plus me-2"></i>Add Movie
+        <% end %>
+      <% else %>
+        <p>This list has no movies yet.</p>
       <% end %>
     </div>
   <% else %>
@@ -42,18 +54,24 @@
             <h3 class="movie-title"><%= bookmark.movie.title %></h3>
             <div class="movie-rating">
               <i class="fa-solid fa-star text-warning"></i>
-              <%= bookmark.movie.rating.round(1) %>
+              <%= bookmark.rating %>/10
+              <span class="movie-tmdb-rating">· TMDB <%= bookmark.movie.rating.round(1) %></span>
             </div>
             <% if bookmark.comment.present? %>
               <p class="movie-comment">"<%= bookmark.comment %>"</p>
             <% end %>
-            <div class="movie-card-footer">
-              <%= link_to bookmark_path(bookmark),
-                    class: "btn btn-outline-danger btn-sm w-100",
-                    data: { turbo_method: :delete, turbo_confirm: "Remove this movie from the list?" } do %>
-                <i class="fa-solid fa-trash me-1"></i>Remove
-              <% end %>
-            </div>
+            <% if current_user == @list.user %>
+              <div class="movie-card-footer d-flex gap-2">
+                <%= link_to edit_bookmark_path(bookmark), class: "btn btn-outline-light btn-sm flex-grow-1" do %>
+                  <i class="fa-solid fa-pen me-1"></i>Edit
+                <% end %>
+                <%= link_to bookmark_path(bookmark),
+                      class: "btn btn-outline-danger btn-sm flex-grow-1",
+                      data: { turbo_method: :delete, turbo_confirm: "Remove this movie from the list?" } do %>
+                  <i class="fa-solid fa-trash me-1"></i>Remove
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>

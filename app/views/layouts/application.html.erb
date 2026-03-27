@@ -20,30 +20,104 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark navbar-expand-md sticky-top">
-      <div class="container">
+    <nav class="navbar navbar-dark sticky-top">
+      <div class="container d-flex align-items-center">
         <%= link_to root_path, class: "navbar-brand" do %>
           <i class="fa-solid fa-film me-2"></i>WatchList
         <% end %>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto align-items-center gap-2">
-            <li class="nav-item">
-              <%= link_to "My Lists", lists_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to new_list_path, class: "btn btn-primary btn-sm px-3" do %>
-                <i class="fa-solid fa-plus me-1"></i>New List
-              <% end %>
-            </li>
-          </ul>
+
+        <%# ── Desktop nav (md+) ─────────────────────────────────────── %>
+        <div class="d-none d-md-flex ms-auto align-items-center gap-3">
+          <% if user_signed_in? %>
+            <%= link_to new_list_path, class: "btn btn-primary btn-sm px-3" do %>
+              <i class="fa-solid fa-plus me-1"></i>New List
+            <% end %>
+            <div class="dropdown">
+              <button class="user-avatar dropdown-toggle" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false"
+                      aria-label="User menu">
+                <%= current_user.email[0].upcase %>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                <li><h6 class="dropdown-header">My Account</h6></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <%= link_to destroy_user_session_path, class: "dropdown-item",
+                        data: { turbo_method: :delete } do %>
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          <% else %>
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-sm px-3" %>
+          <% end %>
         </div>
+
+        <%# ── Mobile hamburger (< md) ───────────────────────────────── %>
+        <div class="d-flex d-md-none ms-auto">
+          <% if user_signed_in? %>
+            <div class="dropdown">
+              <button class="navbar-toggler border-0" type="button"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                <li>
+                  <%= link_to new_list_path, class: "dropdown-item" do %>
+                    <i class="fa-solid fa-plus me-2"></i>New List
+                  <% end %>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <button class="dropdown-item d-flex justify-content-between align-items-center w-100"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#mobileAccountMenu"
+                          aria-expanded="false">
+                    <span><i class="fa-solid fa-user me-2"></i>My Account</span>
+                    <i class="fa-solid fa-chevron-right mobile-chevron"></i>
+                  </button>
+                  <div class="collapse" id="mobileAccountMenu">
+                    <%= link_to destroy_user_session_path,
+                          class: "dropdown-item ps-4",
+                          data: { turbo_method: :delete } do %>
+                      <i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          <% else %>
+            <div class="dropdown">
+              <button class="navbar-toggler border-0" type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                <li><%= link_to "Sign In", new_user_session_path, class: "dropdown-item" %></li>
+                <li><%= link_to "Sign Up", new_user_registration_path, class: "dropdown-item" %></li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+
       </div>
     </nav>
 
     <main>
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
   </body>

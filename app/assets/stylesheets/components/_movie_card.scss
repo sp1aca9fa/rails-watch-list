@@ -71,8 +71,15 @@
 }
 
 .movie-rating {
-  font-size: .82rem;
+  font-size: .85rem;
+  color: $white-text;
+  font-weight: 600;
+}
+
+.movie-tmdb-rating {
+  font-size: .75rem;
   color: $muted-text;
+  font-weight: 400;
 }
 
 .movie-comment {

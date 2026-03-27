@@ -20,3 +20,68 @@
     padding-inline: .6rem;
   }
 }
+
+// Initials avatar button
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: $gold;
+  color: $bg;
+  font-family: $headers-font;
+  font-weight: 700;
+  font-size: .85rem;
+  line-height: 1;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .2s ease, box-shadow .2s ease;
+
+  &:hover  { opacity: .85; }
+  &:focus  { outline: none; box-shadow: 0 0 0 3px rgba($gold, 0.35); }
+
+  // hide Bootstrap's dropdown caret
+  &::after { display: none; }
+}
+
+// Dark dropdown
+.user-dropdown {
+  background: $surface;
+  border: 1px solid $surface-border;
+  border-radius: .5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  min-width: 160px;
+
+  .dropdown-header {
+    color: $muted-text;
+    font-size: .75rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding-block: .5rem;
+  }
+
+  .dropdown-divider { border-color: $surface-border; }
+
+  .dropdown-item {
+    color: $white-text;
+    font-size: .9rem;
+    padding: .55rem 1rem;
+    transition: background .15s ease;
+
+    &:hover, &:focus { background: $surface-hover; color: $white-text; }
+
+    i { color: $muted-text; }
+  }
+}
+
+.mobile-chevron {
+  font-size: .7rem;
+  transition: transform .2s ease;
+}
+
+[data-bs-toggle="collapse"][aria-expanded="true"] .mobile-chevron {
+  transform: rotate(90deg);
+}

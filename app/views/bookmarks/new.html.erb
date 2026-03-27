@@ -6,7 +6,8 @@
     </div>
     <div class="form-card-body">
       <%= simple_form_for [@list, @bookmark] do |f| %>
-        <%= f.association :movie, label: "Movie", prompt: "Select a movie..." %>
+        <%= f.association :movie, collection: Movie.order(:title), label: "Movie", prompt: "Select a movie..." %>
+        <%= f.input :rating, collection: 1..10, label: "Your Rating (1–10)", prompt: "Rate it..." %>
         <%= f.input :comment, placeholder: "What makes this one special?", label: "Your note" %>
         <%= f.submit "Add to List", class: "btn btn-primary btn-submit" %>
       <% end %>

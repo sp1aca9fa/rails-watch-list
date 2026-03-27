@@ -1,0 +1,20 @@
+<div class="form-page">
+  <div class="form-card">
+    <div class="form-card-header">
+      <h1>Edit Entry</h1>
+      <p class="text-muted"><%= @bookmark.movie.title %></p>
+    </div>
+    <div class="form-card-body">
+      <%= simple_form_for @bookmark do |f| %>
+        <%= f.input :rating, collection: 1..10, label: "Your Rating (1–10)", selected: @bookmark.rating %>
+        <%= f.input :comment, placeholder: "What makes this one special?", label: "Your note" %>
+        <%= f.submit "Save Changes", class: "btn btn-primary btn-submit" %>
+      <% end %>
+    </div>
+    <div class="form-card-footer">
+      <%= link_to list_path(@bookmark.list) do %>
+        <i class="fa-solid fa-arrow-left me-1"></i>Back to <%= @bookmark.list.name %>
+      <% end %>
+    </div>
+  </div>
+</div>
