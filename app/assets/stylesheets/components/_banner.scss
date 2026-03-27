@@ -2,7 +2,7 @@
   margin-inline: auto;
 
   background-image:
-    linear-gradient(rgba(17,25,45,0.35), rgba(17,25,45,0.35)),
+    linear-gradient(rgba(17,25,45,0.45), rgba(17,25,45,0.45)),
     linear-gradient(
       to right,
       #11192d 0%,
@@ -12,7 +12,7 @@
     ),
     linear-gradient(
       to bottom,
-      rgba(17, 25, 45, 0) 50%,
+      rgba(17, 25, 45, 0) 40%,
       #11192d 100%
     ),
     asset-url("Orfeo-Multisala-1-1024x683.jpg");
@@ -20,20 +20,25 @@
   background-position: center 40%;
   background-repeat: no-repeat;
 
-  min-height: clamp(400px, 65svh, 750px);
-}
+  min-height: clamp(380px, 60svh, 680px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-inline: 1.5rem;
 
-.banner h1 {
-  font-size: clamp(28px, 5vw, 48px);
-}
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: $white-text;
+    margin-bottom: .5rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
 
-.banner p {
-  font-size: clamp(10px, 2vw, 16px);
-  margin-bottom: 100px
-}
-
-@media (min-width: 1000px) {
-  .banner {
-    max-width: 1000px;
+  .banner-subtitle {
+    font-size: clamp(.9rem, 2vw, 1.1rem);
+    color: rgba($white-text, 0.65);
+    max-width: 440px;
   }
 }

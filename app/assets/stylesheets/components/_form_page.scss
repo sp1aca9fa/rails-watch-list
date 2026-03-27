@@ -1,0 +1,57 @@
+.form-page {
+  min-height: calc(100vh - 58px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 500px;
+  background: $surface;
+  border: 1px solid $surface-border;
+  border-radius: .75rem;
+  overflow: hidden;
+}
+
+.form-card-header {
+  padding: 1.75rem 2rem 1.25rem;
+  border-bottom: 1px solid $surface-border;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $white-text;
+    margin-bottom: .2rem;
+  }
+
+  p { margin: 0; font-size: .88rem; }
+}
+
+.form-card-body {
+  padding: 1.75rem 2rem;
+
+  // Fix simple_form's margin
+  .form-group { margin-bottom: 1.1rem; }
+
+  .form-label { font-size: .85rem; margin-bottom: .35rem; }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: .75rem;
+    padding-block: .65rem;
+    font-size: 1rem;
+  }
+}
+
+.form-card-footer {
+  padding: 1rem 2rem 1.5rem;
+  text-align: center;
+  font-size: .88rem;
+  border-top: 1px solid $surface-border;
+  color: $muted-text;
+
+  a { color: $muted-text; transition: color .2s ease; }
+  a:hover { color: $white-text; }
+}

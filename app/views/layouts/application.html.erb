@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Rails Watch List" %></title>
+    <title><%= content_for(:title) || "WatchList" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Rails Watch List">
+    <meta name="application-name" content="WatchList">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <div class="navbar d-flex justify-content-between">
-      <%= link_to "Home", root_path, class: "ms-2" %>
-      <div class="d-flex gap-2 align-items-center">
-        <p class="m-0">My lists</p>
-        <%= link_to "New list", new_list_path, class: "me-2" %>
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top">
+      <div class="container">
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <i class="fa-solid fa-film me-2"></i>WatchList
+        <% end %>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center gap-2">
+            <li class="nav-item">
+              <%= link_to "My Lists", lists_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_list_path, class: "btn btn-primary btn-sm px-3" do %>
+                <i class="fa-solid fa-plus me-1"></i>New List
+              <% end %>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="main-container">
+    </nav>
+
+    <main>
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>

@@ -1,10 +1,62 @@
-<div style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @list.photo.attached? ? cl_image_path(@list.photo.key) : 'https://happiclap.com/wp-content/uploads/2019/06/Everyday-Clapboard-1.jpg' %>)">
-  <h1><%= @list.name %></h1>
+<div class="show-hero" style="background-image: url(<%= @list.photo.attached? ? cl_image_path(@list.photo.key) : asset_path("Orfeo-Multisala-1-1024x683.jpg") %>)">
+  <div class="show-hero-overlay w-100">
+    <div class="container">
+      <div class="show-hero-content">
+        <h1 class="show-hero-title"><%= @list.name %></h1>
+        <p class="show-hero-meta">
+          <i class="fa-solid fa-film me-1"></i>
+          <%= pluralize(@list.movies.count, "movie") %>
+        </p>
+        <%= link_to new_list_bookmark_path(@list), class: "btn btn-primary" do %>
+          <i class="fa-solid fa-plus me-2"></i>Add Movie
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-<%= link_to "New movie", new_list_bookmark_path(@list) %>
-<% @list.bookmarks.each do |bookmark| %>
-<div class="card">
-  <%= bookmark.movie.title %>
-  <%= link_to "Delete movie", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+
+<div class="container py-5">
+  <% if @list.bookmarks.empty? %>
+    <div class="empty-state text-center py-5">
+      <i class="fa-solid fa-film fa-4x mb-4"></i>
+      <h3>No movies yet</h3>
+      <p>Add your first movie to this list.</p>
+      <%= link_to new_list_bookmark_path(@list), class: "btn btn-primary mt-2" do %>
+        <i class="fa-solid fa-plus me-2"></i>Add Movie
+      <% end %>
+    </div>
+  <% else %>
+    <div class="movie-grid">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="movie-card">
+          <div class="movie-poster">
+            <% if bookmark.movie.poster_url.present? %>
+              <img src="<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>" loading="lazy">
+            <% else %>
+              <div class="movie-poster-placeholder">
+                <i class="fa-solid fa-film"></i>
+              </div>
+            <% end %>
+          </div>
+          <div class="movie-card-body">
+            <h3 class="movie-title"><%= bookmark.movie.title %></h3>
+            <div class="movie-rating">
+              <i class="fa-solid fa-star text-warning"></i>
+              <%= bookmark.movie.rating.round(1) %>
+            </div>
+            <% if bookmark.comment.present? %>
+              <p class="movie-comment">"<%= bookmark.comment %>"</p>
+            <% end %>
+            <div class="movie-card-footer">
+              <%= link_to bookmark_path(bookmark),
+                    class: "btn btn-outline-danger btn-sm w-100",
+                    data: { turbo_method: :delete, turbo_confirm: "Remove this movie from the list?" } do %>
+                <i class="fa-solid fa-trash me-1"></i>Remove
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
-<% end %>

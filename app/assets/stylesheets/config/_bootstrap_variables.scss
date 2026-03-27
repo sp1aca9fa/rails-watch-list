@@ -1,29 +1,62 @@
-// This is where you override default Bootstrap variables
-// 1. Find all Bootstrap variables that you can override at the end of each component's documentation under the `Sass variables` anchor
-// e.g. here are the ones you can override for the navbar https://getbootstrap.com/docs/5.3/components/navbar/#sass-variables
-// 2. These variables are defined with default value (see https://robots.thoughtbot.com/sass-default)
-// 3. You can override them below!
-
-// General style
+// General
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
 $body-bg:                $bg;
+$body-color:             $white-text;
 $font-size-base:         1rem;
 
-// Colors
-$body-color: $font;
-$secondary: $orange;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+// Brand colors
+$primary:   $gold;
+$secondary: $surface;
+$success:   $success-green;
+$danger:    $danger-red;
+$info:      $info-blue;
 
-// Buttons & inputs' radius
-$border-radius-sm:            .0625rem;
-$border-radius:               .125rem;
-$border-radius-lg:            .25rem;
-$border-radius-xl:            .5rem;
-$border-radius-xxl:           1rem;
+// Links
+$link-color:       $gold;
+$link-hover-color: $gold-light;
+$link-decoration:  none;
 
-// Override other variables below!
+// Buttons
+$btn-font-weight: 600;
+$btn-padding-y:   .45rem;
+$btn-padding-x:   1.1rem;
+
+// Inputs
+$input-bg:                 $surface;
+$input-color:              $white-text;
+$input-border-color:       $surface-border;
+$input-focus-border-color: $gold;
+$input-focus-box-shadow:   0 0 0 .25rem rgba(226, 176, 74, 0.2);
+$input-placeholder-color:  $muted-text;
+
+// Form labels
+$form-label-color:       $muted-text;
+$form-label-font-weight: 500;
+
+// Select
+$form-select-bg:               $surface;
+$form-select-color:            $white-text;
+$form-select-border-color:     $surface-border;
+$form-select-focus-border-color: $gold;
+$form-select-focus-box-shadow: 0 0 0 .25rem rgba(226, 176, 74, 0.2);
+$form-select-indicator-color:  $muted-text;
+
+// Bootstrap card (used for generic cards if needed)
+$card-bg:           $surface;
+$card-border-color: $surface-border;
+
+// Navbar
+$navbar-dark-color:                rgba($white-text, 0.65);
+$navbar-dark-hover-color:          $white-text;
+$navbar-dark-active-color:         $white-text;
+$navbar-dark-brand-color:          $white-text;
+$navbar-dark-brand-hover-color:    $gold;
+$navbar-dark-toggler-border-color: $surface-border;
+
+// Border radius
+$border-radius-sm:  .0625rem;
+$border-radius:     .375rem;
+$border-radius-lg:  .5rem;
+$border-radius-xl:  .75rem;
+$border-radius-xxl: 1rem;

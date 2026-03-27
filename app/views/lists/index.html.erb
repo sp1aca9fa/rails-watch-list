@@ -1,15 +1,30 @@
-<div class="banner d-flex-column text-center align-content-center">
-  <h1 class="mb-0">Movie lists</h1>
-  <p class="text-opacity-75 text-secondary">Create and manage your own lists!</p>
+<div class="banner">
+  <h1>Your Movie Lists</h1>
+  <p class="banner-subtitle">Curate and discover your favorite films</p>
+  <%= link_to new_list_path, class: "btn btn-primary btn-lg mt-2" do %>
+    <i class="fa-solid fa-plus me-2"></i>Create a List
+  <% end %>
 </div>
-<div class="container">
-  <h2></h2>
-  <div class="cards-container">
-    <% @lists.each do |list| %>
-      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-      url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg'%>)">
-        <%= link_to list.name, list_path(list), class: '', style: "height: 100%" %>
-      </div>
-    <% end %>
-  </div>
+
+<div class="container py-5">
+  <% if @lists.empty? %>
+    <div class="empty-state text-center py-5">
+      <i class="fa-solid fa-clapperboard fa-4x mb-4"></i>
+      <h3>No lists yet</h3>
+      <p>Get started by creating your first movie list.</p>
+      <%= link_to "Create a List", new_list_path, class: "btn btn-primary mt-2" %>
+    </div>
+  <% else %>
+    <div class="cards-container">
+      <% @lists.each do |list| %>
+        <div class="list-card" style="background-image: url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://img.freepik.com/premium-photo/movie-clapboard-standing-film-set-abandoned-building_237404-9946.jpg' %>)">
+          <div class="list-card-overlay"></div>
+          <%= link_to list_path(list), class: "list-card-link" do %>
+            <span class="list-card-name"><%= list.name %></span>
+            <span class="list-card-count"><%= pluralize(list.movies.count, "movie") %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
