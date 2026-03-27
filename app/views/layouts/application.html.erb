@@ -111,6 +111,22 @@
       </div>
     </nav>
 
+    <%# ── Confirm modal (replaces native window.confirm for turbo_confirm) ── %>
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content confirm-modal-content">
+          <div class="modal-body confirm-modal-body">
+            <i class="fa-solid fa-triangle-exclamation confirm-modal-icon"></i>
+            <p class="confirm-modal-message" id="confirmModalMessage"></p>
+          </div>
+          <div class="modal-footer confirm-modal-footer">
+            <button type="button" class="btn btn-outline-light" id="confirmModalCancel">Cancel</button>
+            <button type="button" class="btn btn-danger" id="confirmModalOk">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <main>
       <% flash.each do |type, message| %>
         <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
