@@ -18,7 +18,6 @@ A movie watchlist application built with Ruby on Rails where users can create li
 - ERB (Embedded Ruby)
 - Bootstrap & Font Awesome (for styling)
 - Simple Form (for form handling)
-- RSpec (for testing)
 
 ## Data Model
 
@@ -64,12 +63,6 @@ Then set up the database and start the server (seeding fetches movies from an ex
 ```bash
 rails db:create db:migrate db:seed
 rails server
-```
-
-Run tests:
-
-```bash
-rspec
 ```
 
 Open in your browser:
